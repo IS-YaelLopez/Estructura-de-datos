@@ -17,3 +17,10 @@ print("\nDespues de la eliminacion, el array es: ")
 inputArr.pop(-1)
 for j in range(len(inputArr)):
     print(inputArr[j], end=" ")
+
+#Eliminando el numero del medio el inputArr[2]
+inputArr = [11, 21, 31, 41, 51, 61]
+print("\nDespues de la eliminacion, el array es: ") 
+inputArr.pop(2)
+for j in range(len(inputArr)):
+    print(inputArr[j], end=" ")
