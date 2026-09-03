@@ -1,0 +1,19 @@
+# datos
+lista = [10, 20, 30, 40, 50]
+
+
+# RECORRIDO SECUENCIAL
+print("RECORRIDO SECUENCIAL:")
+
+for i in range(len(lista)):
+    print(lista[i])
+    #muestra la lista simple como estaba en la lista
+    
+# RECORRIDO INVERSO
+print("\nRECORRIDO INVERSO:")
+# \n salto de linea
+for i in range(len(lista) - 1, -1, -1):
+    print(lista[i])
+    #mostrara el recorrido inverso por los -1 
+    # esto sucede porque inicio del ultimo indice o sea el -1, y va con pasos atras -1
+    # y acaba hasta llegar al indice 0 
