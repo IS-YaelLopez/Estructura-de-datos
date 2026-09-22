@@ -17,6 +17,8 @@ void color(int codigo){
 // 3: Dama Clara (B), 4: Dama Roja (R)
 int tablero[8][8];
 
+int historial[500][8][8];
+int totalMovimientos;
 // Estado del juego
 int turno = 1; // 1 = Jugador de fichas Claras, 2 = Jugador de fichas Rojas
 int selFila = -1, selCol = -1; // Guarda la posición de la ficha en captura múltiple
@@ -154,10 +156,10 @@ bool hayCapturaGeneral()
     }
     return false;
 }
-//a
-//BUCLE EN WHIILE PA INICIAR EL JUEGO
-int main() {
-    inicializarTablero();
+
+//funcion para el juego principal
+void jugarPartida() {
+   
 
     while (true) {
         //limpiamos la pantalla para que se vea solamente el turno actual
@@ -353,16 +355,97 @@ int main() {
             selFila = -1;
             selCol = -1;
             enCapturaMultiple = false;
-
             //cambiamos el turno al otro jugador
             turno = (turno == 1) ? 2 : 1;
+        }
+           //guardo el tablero para el movimiento
+            for (int fila =0; fila < 8; fila++){
+                for (int columna =0; columna < 8; columna++){
+                    historial[totalMovimientos][fila][columna] = tablero[fila][columna];
+                }
+            }
+            totalMovimientos++; //incrementa en 1 los movimientos hechos
 
-            system("cls");
-            mostrarTablero();
+            system("cls"); // limpiamos
+            mostrarTablero(); //mostramos el tablero actualizadito
             cout << "\n Movimiento realizado \n";
             system("Pause");
+        
+    }
+}
+
+void cargarPartida(){
+
+    if (totalMovimientos == 0){
+        cout << "\nNo hay movimientos guardados.\n";
+        system("Pause");
+        return;
+    }
+
+    for (int movimiento = 0; movimiento < totalMovimientos; movimiento++){
+
+        system("cls");
+
+        //copiamos el movimiento al tablero
+        for (int fila = 0; fila < 8; fila++){
+            for (int columna = 0; columna < 8; columna++){
+                tablero[fila][columna] =
+                    historial[movimiento][fila][columna];
+            }
+        }
+
+        cout << "================================\n";
+        cout << " Movimiento: " << movimiento + 1;
+        cout << " de: " << totalMovimientos << "\n";
+        cout << "================================\n\n";
+
+        mostrarTablero();
+
+        cout << "\n Enter para el proximo movimiento";
+
+        cin.ignore();
+        cin.get();
+    }
+
+    system("cls");
+
+    cout << "================================\n";
+    cout << "       FIN DE LA PARTIDA        \n";
+    cout << "================================\n";
+
+    system("Pause");
+}
+int main(){
+
+    char op;
+
+    while (true){
+
+        system("cls");
+
+        cout << "===============================\n";
+        cout << "       DAMAS ""CHINAS""        \n";
+        cout << "===============================\n";
+        cout << "     (1) Iniciar juego         \n";
+        cout << "      (2) Cargar partida       \n";
+        cout << "         (3) Salir             \n";
+        cout << "===============================\n";
+
+        cin >> op;
+
+        if (op == '1') {
+            inicializarTablero();
+            jugarPartida();
+        }
+
+        if (op == '2') {
+            cargarPartida();
+        }
+
+        if (op == '3') {
+            break;
         }
     }
+
     return 0;
-    //fin
-}//
+}
