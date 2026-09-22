@@ -136,7 +136,7 @@ bool hayCapturaGeneral()
     }
     return false;
 }
-
+//a
 //BUCLE EN WHIILE PA INICIAR EL JUEGO
 int main() {
     inicializarTablero();
