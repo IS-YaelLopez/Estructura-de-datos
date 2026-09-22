@@ -1,10 +1,15 @@
 #include <iostream> //puedo usar cout y cin
 #include <string> // lo uso pa guardar textos
 #include <cstdlib> // Para system("cls")
+#include <windows.h> //lo usare para poner color
+#include <fstream> //servira para guardar la partida
 using namespace std;
 
-//metemos guardar partida, detener cada movimiento
-//meterle color
+// funcion llamada color que recibe un numero y ese numero se lo 
+//manda a windows para cambiar el color de consola
+void color(int codigo){
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), codigo);
+}
 
 // Matriz principal 8x8 (Representación del Tablero)
 // 0: Casilla vacía
@@ -36,21 +41,34 @@ void inicializarTablero() {
 
 //VISUALIZACIÓN DEL TABLERO EN CONSOLA
 void mostrarTablero() {
+
     cout << "\n       0   1   2   3   4   5   6   7\n     ---------------------------------\n";
+
     for (int f = 0; f < 8; f++) {
         cout << "  " << f << " |";
         for (int c = 0; c < 8; c++) {
             // Imprime casilla no jugable
             if ((f + c) % 2 == 0) {
                 cout << "   |";
+
             } else {
+
                 // Imprime el contenido de la casilla oscura o sea jugable
                 int p = tablero[f][c];
-                cout << (p == 0 ? " . |" : p == 1 ? " b |" : p == 2 ? " r |" : p == 3 ? " B |" : " R |");
+                //Aqui verificamos que pieza hay en la casilla
+                //Con los else if vamos revisando cada caso y dependiendo
+                //del numero mostramos la pieza correspondiente y le ponemos color.
+                if (p == 0){cout << " . |"; }
+                else if (p == 1){color(112); cout << " b "; color(7); cout << "|";}
+                else if (p == 2){color(12); cout << " r "; color(7); cout << "|";}
+                else if (p == 3){color(112); cout << " B "; color(7); cout << "|";}
+                else if (p == 4){color(12); cout << " R "; color(7); cout << "|";}
             }
         }
+
         cout << "\n     ---------------------------------\n";
     }
+
     cout << "Turno actual: " << (turno == 1 ? "Claras (b/B)\n" : "Rojas (r/R)\n");
 }
 
@@ -204,6 +222,7 @@ int main() {
             cout << "GANA EL JUGADOR "
                  << (turno == 1 ? "ROJO (r)" : "BLANCO (b)")
                  << "\n";
+                 system("Pause");
 
             break;
         }
@@ -337,6 +356,11 @@ int main() {
 
             //cambiamos el turno al otro jugador
             turno = (turno == 1) ? 2 : 1;
+
+            system("cls");
+            mostrarTablero();
+            cout << "\n Movimiento realizado \n";
+            system("Pause");
         }
     }
     return 0;
