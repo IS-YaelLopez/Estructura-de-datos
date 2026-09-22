@@ -357,6 +357,11 @@ void jugarPartida() {
             enCapturaMultiple = false;
             //cambiamos el turno al otro jugador
             turno = (turno == 1) ? 2 : 1;
+
+            system("cls");
+            mostrarTablero();
+            cout << "\n Movimiento realizado \n";
+            system("Pause");
         }
            //guardo el tablero para el movimiento
             for (int fila =0; fila < 8; fila++){
