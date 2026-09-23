@@ -12,9 +12,9 @@ void color(int codigo){
 }
 
 // Matriz principal 8x8 (Representación del Tablero)
-// 0: Casilla vacía
-// 1: Ficha Clara (b), 2: Ficha Roja (r)
-// 3: Dama Clara (B), 4: Dama Roja (R)
+// 0 Casilla vacía
+// 1 Ficha Clara (b), 2 Ficha Roja (r)
+// 3 Dama Clara (B), 4 Dama Roja (R)
 int tablero[8][8];
 
 int historial[500][8][8];
@@ -235,7 +235,7 @@ void jugarPartida() {
         //si no estamos haciendo captura multiple podemos escoger una ficha
         if (!enCapturaMultiple) {
 
-            cout << "\nSelecciona una ficha (0 para acordar fin): ";
+            cout << "\nSelecciona una ficha(0 para acordar fin): ";
             cin >> sel;
 
             //si ponen 0 se termina la partida
@@ -256,7 +256,7 @@ void jugarPartida() {
         //guardamos la direccion que quiere hacer el jugador
         string dir;
 
-        cout << "Mueve la ficha hacia izquierda o derecha: ";
+        cout << "Mueve la ficha hacia izquierda o derecha (D o I): ";
         cin >> dir;
 
         //convertimos las letras a minusculas para evitar problemas
@@ -265,8 +265,8 @@ void jugarPartida() {
             c = tolower(c);
 
         //decidimos si la ficha va a la izquierda o a la derecha
-        int dCol = (dir == "izquierda") ? -1 :
-                   (dir == "derecha") ? 1 : 0;
+        int dCol = (dir == "i") ? -1 :
+                   (dir == "d") ? 1 : 0;
 
         //si escribio otra cosa volvemos a empezar
         if (dCol == 0)
@@ -373,7 +373,7 @@ void jugarPartida() {
         
     }
 }
-
+//cargo partida
 void cargarPartida(){
 
     if (totalMovimientos == 0){
@@ -403,8 +403,8 @@ void cargarPartida(){
 
         cout << "\n Enter para el proximo movimiento";
 
-        cin.ignore();
-        cin.get();
+        cin.ignore(); //limpia el buffer
+        cin.get();//lee caulquier letra
     }
 
     system("cls");
@@ -446,6 +446,5 @@ int main(){
             break;
         }
     }
-
     return 0;
 }
